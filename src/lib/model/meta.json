@@ -1,0 +1,83 @@
+{
+ "feature_encoders": {
+  "Sex": [
+   "Female",
+   "Male"
+  ],
+  "Grade": [
+   "High",
+   "Intermediate",
+   "Low"
+  ],
+  "Histological type": [
+   "epithelioid sarcoma",
+   "leiomyosarcoma",
+   "malignant solitary fibrous tumor",
+   "myxofibrosarcoma",
+   "myxoid fibrosarcoma",
+   "pleiomorphic leiomyosarcoma",
+   "pleiomorphic spindle cell undifferentiated",
+   "pleomorphic sarcoma",
+   "poorly differentiated synovial sarcoma",
+   "sclerosing epithelioid fibrosarcoma",
+   "synovial sarcoma",
+   "undifferentiated - pleiomorphic",
+   "undifferentiated pleomorphic liposarcoma"
+  ],
+  "Site of primary STS": [
+   "left biceps",
+   "left buttock",
+   "left thigh",
+   "parascapusular",
+   "right buttock",
+   "right parascapusular",
+   "right thigh"
+  ]
+ },
+ "target_encoders": {
+  "Treatment": [
+   "Radiotherapy + Surgery",
+   "Radiotherapy + Surgery + Chemotherapy",
+   "Surgery + Chemotherapy"
+  ],
+  "Predicted_Stage": [
+   "Stage I",
+   "Stage II",
+   "Stage III",
+   "Stage IV"
+  ],
+  "Surgical_Duration": [
+   "1 hrs",
+   "2 hrs",
+   "4 hrs",
+   "6+ hrs"
+  ],
+  "Surgical_Complexity": [
+   "High",
+   "Low",
+   "Moderate"
+  ],
+  "Post_Treatment_Care_Instructions": [
+   "Strict assisted walking; Avoid stairs completely initially; Daily supervised physiotherapy; High-protein calorie-dense diet; Continuous pain & wound monitoring; Frequent hospital follow-ups",
+   "Walk slowly with support; Avoid stairs initially; Daily physiotherapy; Balanced high-protein diet; Pain & wound monitoring; Regular follow-ups",
+   "Walk slowly with support; Balanced high-protein diet; Regular follow-ups"
+  ]
+ },
+ "targets": {
+  "Treatment": {
+   "n_classes": 3
+  },
+  "Predicted_Stage": {
+   "n_classes": 4
+  },
+  "Surgical_Duration": {
+   "n_classes": 4
+  },
+  "Surgical_Complexity": {
+   "n_classes": 3
+  },
+  "Post_Treatment_Care_Instructions": {
+   "n_classes": 3
+  }
+ }
+}
