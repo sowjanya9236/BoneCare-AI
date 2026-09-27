@@ -1,9 +1,6 @@
 import { createServerFn } from "@tanstack/react-start";
 import { z } from "zod";
 import meta from "./model/meta.json";
-import treatmentModel from "./model/Treatment.json";
-import stageModel from "./model/Predicted_Stage.json";
-import durationModel from "./model/Surgical_Duration.json";
 
 type TreeNode = {
   nodeid: number;
@@ -106,13 +103,19 @@ export const predictPatient = createServerFn({ method: "POST" })
   .validator((data) => inputSchema.parse(data))
   .handler(async ({ data }) => {
     const features = encodeFeatures(data);
-    const complexityModel = loadGzModel(complexityGz);
-    const careModel = loadGzModel(careGz);
+    const [treatmentModel, stageModel, durationModel, complexityModel, careModel] =
+      await Promise.all([
+        import("./model/Treatment.json").then((m) => m.default as ModelFile),
+        import("./model/Predicted_Stage.json").then((m) => m.default as ModelFile),
+        import("./model/Surgical_Duration.json").then((m) => m.default as ModelFile),
+        loadGzModel("complexity"),
+        loadGzModel("care"),
+      ]);
 
     const models: Record<string, ModelFile> = {
-      Treatment: treatmentModel as ModelFile,
-      Predicted_Stage: stageModel as ModelFile,
-      Surgical_Duration: durationModel as ModelFile,
+      Treatment: treatmentModel,
+      Predicted_Stage: stageModel,
+      Surgical_Duration: durationModel,
       Surgical_Complexity: complexityModel,
       Post_Treatment_Care_Instructions: careModel,
     };
