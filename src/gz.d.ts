@@ -1,4 +1,4 @@
-declare module "*.gz?inline" {
+declare module "*.bin?inline" {
   const src: string;
   export default src;
 }
