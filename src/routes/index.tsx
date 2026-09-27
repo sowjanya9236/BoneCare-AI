@@ -1,5 +1,8 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import heroBone from "@/assets/hero-bone.png";
+import scanKnee from "@/assets/scan-knee.png";
+import scanSpine from "@/assets/scan-spine.png";
+import scanTumor from "@/assets/scan-tumor.png";
 import { Zap, Brain, HeartPulse, Stethoscope, Pill, ScanLine } from "lucide-react";
 
 export const Route = createFileRoute("/")({
@@ -102,6 +105,54 @@ function Index() {
           ))}
         </div>
       </section>
+
+      <section className="mx-auto max-w-6xl px-5 pb-20">
+        <p className="text-center text-xs font-bold tracking-[0.25em] text-muted-foreground uppercase">
+          Inside the analysis
+        </p>
+        <h2 className="mt-2 text-center text-3xl font-bold">
+          What the model reads in a bone scan
+        </h2>
+        <div className="mt-10 grid gap-5 md:grid-cols-3">
+          {scans.map((s) => (
+            <figure key={s.title} className="card-surface overflow-hidden">
+              <img
+                src={s.src}
+                alt={s.alt}
+                width={1024}
+                height={1024}
+                loading="lazy"
+                className="aspect-square w-full object-cover"
+              />
+              <figcaption className="p-5">
+                <h3 className="font-semibold">{s.title}</h3>
+                <p className="mt-1 text-sm text-muted-foreground">{s.text}</p>
+              </figcaption>
+            </figure>
+          ))}
+        </div>
+      </section>
     </>
   );
 }
+
+const scans = [
+  {
+    src: scanKnee,
+    alt: "X-ray style scan of a knee joint with a tumour highlighted in red",
+    title: "Tumour localisation",
+    text: "Lesions flagged directly on the affected bone.",
+  },
+  {
+    src: scanSpine,
+    alt: "X-ray style scan of the spine and pelvis with a vertebra highlighted",
+    title: "Stage mapping",
+    text: "Spread across vertebrae and pelvis weighed together.",
+  },
+  {
+    src: scanTumor,
+    alt: "Radiograph of a femur showing an osteosarcoma near the knee",
+    title: "Histology patterns",
+    text: "Radiograph textures matched to tumour type.",
+  },
+];

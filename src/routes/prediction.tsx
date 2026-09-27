@@ -1,8 +1,10 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
 import { useServerFn } from "@tanstack/react-start";
-import { Stethoscope, Pill, Hospital, Timer, HeartPulse, Sparkles, Check, TriangleAlert } from "lucide-react";
+import { Stethoscope, Pill, Hospital, Timer, HeartPulse, Sparkles, Check, TriangleAlert, ScanLine } from "lucide-react";
 import { predictPatient } from "@/lib/predict.functions";
+import doctor from "@/assets/doctor.png";
+import scanKnee from "@/assets/scan-knee.png";
 
 export const Route = createFileRoute("/prediction")({
   head: () => ({
@@ -113,8 +115,9 @@ function Prediction() {
 
   return (
     <div className="bg-hero">
-      <div className="mx-auto max-w-3xl px-5 py-16">
-        <form onSubmit={analyze} className="card-surface p-8 md:p-10">
+      <div className="mx-auto max-w-5xl px-5 py-16">
+        <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_300px] lg:items-start">
+          <form onSubmit={analyze} className="card-surface p-8 md:p-10">
           <h1 className="flex items-center gap-2 text-2xl font-bold">
             <Stethoscope className="size-6 text-primary" /> Patient Information
           </h1>
