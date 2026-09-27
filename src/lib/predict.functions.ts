@@ -5,8 +5,8 @@ import treatmentModel from "./model/Treatment.json";
 import stageModel from "./model/Predicted_Stage.json";
 import durationModel from "./model/Surgical_Duration.json";
 import { gunzipSync } from "zlib";
-import complexityGz from "./model/Surgical_Complexity.json.gz?inline";
-import careGz from "./model/Post_Treatment_Care_Instructions.json.gz?inline";
+import complexityGz from "./model/Surgical_Complexity.bin?inline";
+import careGz from "./model/Post_Treatment_Care_Instructions.bin?inline";
 
 type TreeNode = {
   nodeid: number;
@@ -100,7 +100,7 @@ function loadGzModel(dataUri: string): ModelFile {
 }
 
 export const predictPatient = createServerFn({ method: "POST" })
-  .inputValidator((data) => inputSchema.parse(data))
+  .validator((data) => inputSchema.parse(data))
   .handler(async ({ data }) => {
     const features = encodeFeatures(data);
     const complexityModel = loadGzModel(complexityGz);
