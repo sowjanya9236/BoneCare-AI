@@ -103,10 +103,8 @@ export const predictPatient = createServerFn({ method: "POST" })
   .inputValidator((data) => inputSchema.parse(data))
   .handler(async ({ data }) => {
     const features = encodeFeatures(data);
-    const [complexityModel, careModel] = await Promise.all([
-      loadAssetModel(complexityAsset as { url: string }),
-      loadAssetModel(careAsset as { url: string }),
-    ]);
+    const complexityModel = loadGzModel(complexityGz);
+    const careModel = loadGzModel(careGz);
 
     const models: Record<string, ModelFile> = {
       Treatment: treatmentModel as ModelFile,
