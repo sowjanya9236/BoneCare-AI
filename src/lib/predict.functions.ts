@@ -93,10 +93,10 @@ function predict(model: ModelFile, features: number[]): number {
   return best;
 }
 
-async function loadAssetModel(asset: { url: string }): Promise<ModelFile> {
-  const res = await fetch(asset.url);
-  if (!res.ok) throw new Error(`Failed to load model: ${res.status}`);
-  return (await res.json()) as ModelFile;
+function loadGzModel(dataUri: string): ModelFile {
+  const base64 = dataUri.slice(dataUri.indexOf(",") + 1);
+  const buf = gunzipSync(Buffer.from(base64, "base64"));
+  return JSON.parse(buf.toString("utf-8")) as ModelFile;
 }
 
 export const predictPatient = createServerFn({ method: "POST" })
