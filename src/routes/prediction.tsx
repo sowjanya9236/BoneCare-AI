@@ -1,6 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
-import { Stethoscope, Pill, Hospital, Timer, HeartPulse, Sparkles, Check } from "lucide-react";
+import { useServerFn } from "@tanstack/react-start";
+import { Stethoscope, Pill, Hospital, Timer, HeartPulse, Sparkles, Check, TriangleAlert } from "lucide-react";
+import { predictPatient } from "@/lib/predict.functions";
 
 export const Route = createFileRoute("/prediction")({
   head: () => ({
@@ -23,23 +25,29 @@ export const Route = createFileRoute("/prediction")({
 });
 
 const HISTOLOGY = [
-  "Undifferentiated pleomorphic sarcoma",
-  "Osteosarcoma",
-  "Ewing sarcoma",
-  "Chondrosarcoma",
-  "Chordoma",
-  "Fibrosarcoma",
+  "epithelioid sarcoma",
+  "leiomyosarcoma",
+  "malignant solitary fibrous tumor",
+  "myxofibrosarcoma",
+  "myxoid fibrosarcoma",
+  "pleiomorphic leiomyosarcoma",
+  "pleiomorphic spindle cell undifferentiated",
+  "pleomorphic sarcoma",
+  "poorly differentiated synovial sarcoma",
+  "sclerosing epithelioid fibrosarcoma",
+  "synovial sarcoma",
+  "undifferentiated - pleiomorphic",
+  "undifferentiated pleomorphic liposarcoma",
 ];
 
 const SITES = [
-  "Right thigh",
-  "Left thigh",
-  "Right upper arm",
-  "Left upper arm",
-  "Pelvis",
-  "Spine",
-  "Knee",
-  "Shoulder",
+  "left biceps",
+  "left buttock",
+  "left thigh",
+  "parascapusular",
+  "right buttock",
+  "right parascapusular",
+  "right thigh",
 ];
 
 type Result = {
@@ -54,56 +62,8 @@ const inputClass =
   "w-full rounded-xl border border-input bg-card px-4 py-3 text-sm text-foreground shadow-soft outline-none transition-shadow placeholder:text-muted-foreground focus:ring-2 focus:ring-ring";
 const labelClass = "mb-2 block text-sm font-semibold text-foreground";
 
-function predictLocally(form: {
-  age: string;
-  sex: string;
-  grade: string;
-  size: string;
-  histology: string;
-  site: string;
-}): Result {
-  const size = Number(form.size) || 0;
-  const age = Number(form.age) || 0;
-  const highGrade = form.grade === "High";
-
-  const stage =
-    highGrade && size > 8
-      ? "Stage III"
-      : highGrade || size > 5
-        ? "Stage II"
-        : "Stage I";
-
-  const treatment =
-    stage === "Stage III"
-      ? "Chemotherapy + Surgery"
-      : stage === "Stage II"
-        ? "Radiotherapy + Surgery"
-        : "Surgery";
-
-  const complexity =
-    stage === "Stage III" || form.site === "Spine" || form.site === "Pelvis"
-      ? "High"
-      : stage === "Stage II"
-        ? "Moderate"
-        : "Low";
-
-  const hours = stage === "Stage III" ? 4 : stage === "Stage II" ? 2 : 1;
-
-  return {
-    treatment,
-    stage,
-    complexity,
-    duration: `${hours} hrs`,
-    care: [
-      "Daily physiotherapy",
-      "Balanced high-protein diet",
-      "Pain & wound monitoring",
-      age > 60 ? "Bone density review every 3 months" : "Regular follow-ups",
-    ],
-  };
-}
-
 function Prediction() {
+  const runPrediction = useServerFn(predictPatient);
   const [form, setForm] = useState({
     age: "31",
     sex: "Female",
@@ -113,6 +73,7 @@ function Prediction() {
     site: SITES[0]!,
   });
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
   const [result, setResult] = useState<Result | null>(null);
 
   const set = (k: keyof typeof form) => (v: string) =>
@@ -121,24 +82,30 @@ function Prediction() {
   async function analyze(e: React.FormEvent) {
     e.preventDefault();
     setLoading(true);
-    const base = import.meta.env["VITE_API_URL"] as string | undefined;
+    setError(null);
     try {
-      if (base) {
-        const res = await fetch(`${base.replace(/\/$/, "")}/predict`, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(form),
-        });
-        if (res.ok) {
-          const data = (await res.json()) as Partial<Result>;
-          setResult({ ...predictLocally(form), ...data });
-          return;
-        }
-      }
-      await new Promise((r) => setTimeout(r, 700));
-      setResult(predictLocally(form));
-    } catch {
-      setResult(predictLocally(form));
+      const data = await runPrediction({
+        data: {
+          Age: Number(form.age),
+          Sex: form.sex,
+          Grade: form.grade,
+          "Histological type": form.histology,
+          "Site of primary STS": form.site,
+          Tumor_Size: Number(form.size),
+        },
+      });
+      setResult({
+        treatment: data["Treatment"]!,
+        stage: data["Predicted_Stage"]!,
+        complexity: data["Surgical_Complexity"]!,
+        duration: data["Surgical_Duration"]!,
+        care: data["Post_Treatment_Care_Instructions"]!
+          .split(";")
+          .map((s) => s.trim())
+          .filter(Boolean),
+      });
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Prediction failed");
     } finally {
       setLoading(false);
     }
@@ -183,7 +150,6 @@ function Prediction() {
               >
                 <option>Female</option>
                 <option>Male</option>
-                <option>Other</option>
               </select>
             </div>
             <div>
@@ -196,9 +162,9 @@ function Prediction() {
                 value={form.grade}
                 onChange={(e) => set("grade")(e.target.value)}
               >
-                <option>Low</option>
-                <option>Intermediate</option>
                 <option>High</option>
+                <option>Intermediate</option>
+                <option>Low</option>
               </select>
             </div>
             <div>
@@ -259,6 +225,12 @@ function Prediction() {
               {loading ? "Analyzing…" : "Analyze Patient"}
             </span>
           </button>
+
+          {error && (
+            <p className="mt-4 flex items-center gap-2 rounded-xl border border-destructive/30 bg-destructive/10 px-4 py-3 text-sm text-destructive">
+              <TriangleAlert className="size-4 shrink-0" /> {error}
+            </p>
+          )}
         </form>
 
         {result && <Results result={result} />}
