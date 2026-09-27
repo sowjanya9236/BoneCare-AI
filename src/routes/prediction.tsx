@@ -236,6 +236,47 @@ function Prediction() {
           )}
         </form>
 
+        <aside className="space-y-5 lg:sticky lg:top-24">
+          <div className="card-surface overflow-hidden">
+            <img
+              src={doctor}
+              alt="Oncologist reviewing patient results on a tablet"
+              width={1024}
+              height={1024}
+              loading="lazy"
+              className="aspect-[4/5] w-full object-cover"
+            />
+            <div className="p-5">
+              <h2 className="flex items-center gap-2 text-sm font-semibold">
+                <Stethoscope className="size-4 text-primary" /> Built with
+                clinicians
+              </h2>
+              <p className="mt-1 text-xs text-muted-foreground">
+                Results structured the way an oncologist reviews a case.
+              </p>
+            </div>
+          </div>
+          <div className="card-surface overflow-hidden">
+            <img
+              src={scanKnee}
+              alt="Bone scan with a tumour highlighted near the knee"
+              width={1024}
+              height={1024}
+              loading="lazy"
+              className="aspect-square w-full object-cover"
+            />
+            <div className="p-5">
+              <h2 className="flex items-center gap-2 text-sm font-semibold">
+                <ScanLine className="size-4 text-primary" /> Scan-aware outputs
+              </h2>
+              <p className="mt-1 text-xs text-muted-foreground">
+                Predictions weigh site, size and grade together.
+              </p>
+            </div>
+          </div>
+        </aside>
+        </div>
+
         {result && <Results result={result} />}
       </div>
     </div>
