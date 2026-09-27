@@ -4,9 +4,6 @@ import meta from "./model/meta.json";
 import treatmentModel from "./model/Treatment.json";
 import stageModel from "./model/Predicted_Stage.json";
 import durationModel from "./model/Surgical_Duration.json";
-import { gunzipSync } from "zlib";
-import complexityGz from "./model/Surgical_Complexity.bin?inline";
-import careGz from "./model/Post_Treatment_Care_Instructions.bin?inline";
 
 type TreeNode = {
   nodeid: number;
@@ -93,7 +90,13 @@ function predict(model: ModelFile, features: number[]): number {
   return best;
 }
 
-function loadGzModel(dataUri: string): ModelFile {
+async function loadGzModel(which: "complexity" | "care"): Promise<ModelFile> {
+  const { gunzipSync } = await import("zlib");
+  const mod =
+    which === "complexity"
+      ? await import("./model/Surgical_Complexity.bin?inline")
+      : await import("./model/Post_Treatment_Care_Instructions.bin?inline");
+  const dataUri = mod.default as string;
   const base64 = dataUri.slice(dataUri.indexOf(",") + 1);
   const buf = gunzipSync(Buffer.from(base64, "base64"));
   return JSON.parse(buf.toString("utf-8")) as ModelFile;
