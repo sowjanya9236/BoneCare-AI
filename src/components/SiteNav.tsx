@@ -1,4 +1,5 @@
 import { Link } from "@tanstack/react-router";
+import { Bone } from "lucide-react";
 
 const links = [
   { to: "/", label: "Home" },
@@ -13,7 +14,7 @@ export function SiteNav() {
       <nav className="mx-auto flex h-16 max-w-6xl items-center justify-between px-5">
         <Link to="/" className="flex items-center gap-2">
           <span className="grid size-9 place-items-center rounded-xl bg-gradient-primary text-lg shadow-glow">
-            🦴
+            <Bone className="size-5 text-primary-foreground" />
           </span>
           <span className="font-display text-lg font-semibold tracking-tight">
             BoneCare <span className="text-gradient">AI</span>

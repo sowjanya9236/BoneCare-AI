@@ -1,5 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import heroBone from "@/assets/hero-bone.png";
+import { Zap, Brain, HeartPulse, Stethoscope, Pill, ScanLine } from "lucide-react";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -23,17 +24,17 @@ export const Route = createFileRoute("/")({
 
 const highlights = [
   {
-    icon: "⚡",
+    Icon: Zap,
     title: "Instant analysis",
     text: "Six clinical inputs, a full recommendation set in seconds.",
   },
   {
-    icon: "🧠",
+    Icon: Brain,
     title: "Trained on patterns",
     text: "Grade, size, histology and site are weighed together.",
   },
   {
-    icon: "❤️",
+    Icon: HeartPulse,
     title: "Care planning",
     text: "Post-treatment guidance alongside every prediction.",
   },
@@ -46,7 +47,7 @@ function Index() {
         <div className="mx-auto grid max-w-6xl items-center gap-12 px-5 py-20 md:grid-cols-2 md:py-28">
           <div className="animate-rise">
             <span className="inline-flex items-center gap-2 rounded-full border border-border bg-card px-4 py-1.5 text-xs font-semibold tracking-wide text-muted-foreground uppercase">
-              🩻 Clinical decision support
+              <ScanLine className="size-4" /> Clinical decision support
             </span>
             <h1 className="mt-6 text-4xl leading-[1.05] font-extrabold md:text-6xl">
               AI-Powered <span className="text-gradient">Bone Cancer</span>{" "}
@@ -81,10 +82,10 @@ function Index() {
               className="animate-float relative w-64 drop-shadow-2xl md:w-80"
             />
             <div className="card-surface absolute top-6 left-0 px-4 py-3 text-sm font-semibold">
-              🩺 Stage detection
+              <span className="inline-flex items-center gap-2"><Stethoscope className="size-4 text-primary" /> Stage detection</span>
             </div>
             <div className="card-surface absolute right-0 bottom-10 px-4 py-3 text-sm font-semibold">
-              💊 Treatment plan
+              <span className="inline-flex items-center gap-2"><Pill className="size-4 text-primary" /> Treatment plan</span>
             </div>
           </div>
         </div>
@@ -94,7 +95,7 @@ function Index() {
         <div className="grid gap-5 md:grid-cols-3">
           {highlights.map((h) => (
             <div key={h.title} className="card-surface p-7">
-              <span className="text-2xl">{h.icon}</span>
+              <h.Icon className="size-7 text-primary" />
               <h3 className="mt-4 text-lg font-semibold">{h.title}</h3>
               <p className="mt-2 text-sm text-muted-foreground">{h.text}</p>
             </div>

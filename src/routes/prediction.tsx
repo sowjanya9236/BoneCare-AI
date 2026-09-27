@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
+import { Stethoscope, Pill, Hospital, Timer, HeartPulse, Sparkles, Check } from "lucide-react";
 
 export const Route = createFileRoute("/prediction")({
   head: () => ({
@@ -147,7 +148,9 @@ function Prediction() {
     <div className="bg-hero">
       <div className="mx-auto max-w-3xl px-5 py-16">
         <form onSubmit={analyze} className="card-surface p-8 md:p-10">
-          <h1 className="text-2xl font-bold">🩺 Patient Information</h1>
+          <h1 className="flex items-center gap-2 text-2xl font-bold">
+            <Stethoscope className="size-6 text-primary" /> Patient Information
+          </h1>
           <p className="mt-1 text-sm text-muted-foreground">
             Enter patient details for AI analysis
           </p>
@@ -251,7 +254,10 @@ function Prediction() {
             disabled={loading}
             className="mt-8 w-full rounded-full bg-gradient-primary py-4 font-semibold text-primary-foreground shadow-elevated transition-transform hover:-translate-y-0.5 disabled:opacity-60"
           >
-            {loading ? "Analyzing…" : "✨ Analyze Patient"}
+            <span className="inline-flex items-center justify-center gap-2">
+              <Sparkles className="size-5" />
+              {loading ? "Analyzing…" : "Analyze Patient"}
+            </span>
           </button>
         </form>
 
@@ -263,22 +269,22 @@ function Prediction() {
 
 function Results({ result }: { result: Result }) {
   const cards = [
-    { icon: "💊", label: "Treatment", value: result.treatment },
-    { icon: "🩺", label: "Stage", value: result.stage },
-    { icon: "🏥", label: "Complexity", value: result.complexity },
-    { icon: "⏱", label: "Duration", value: result.duration },
+    { Icon: Pill, label: "Treatment", value: result.treatment },
+    { Icon: Stethoscope, label: "Stage", value: result.stage },
+    { Icon: Hospital, label: "Complexity", value: result.complexity },
+    { Icon: Timer, label: "Duration", value: result.duration },
   ];
 
   return (
     <section className="animate-rise mt-12">
       <p className="text-center text-xs font-bold tracking-[0.25em] text-muted-foreground uppercase">
-        ✨ AI Analysis Complete
+        AI Analysis Complete
       </p>
 
       <div className="mt-6 grid gap-5 sm:grid-cols-2">
         {cards.map((c) => (
           <div key={c.label} className="card-surface p-7 text-center">
-            <span className="text-2xl">{c.icon}</span>
+            <c.Icon className="mx-auto size-7 text-primary" />
             <p className="mt-3 text-xs font-semibold tracking-widest text-muted-foreground uppercase">
               {c.label}
             </p>
@@ -290,12 +296,14 @@ function Results({ result }: { result: Result }) {
       </div>
 
       <div className="card-surface mt-5 p-7">
-        <h2 className="text-lg font-semibold">❤️ Post-Treatment Care</h2>
+        <h2 className="flex items-center gap-2 text-lg font-semibold">
+          <HeartPulse className="size-5 text-primary" /> Post-Treatment Care
+        </h2>
         <ul className="mt-4 space-y-3">
           {result.care.map((c) => (
             <li key={c} className="flex items-center gap-3 text-muted-foreground">
               <span className="grid size-6 shrink-0 place-items-center rounded-full bg-accent text-xs text-accent-foreground">
-                ✓
+                <Check className="size-3.5" />
               </span>
               {c}
             </li>
