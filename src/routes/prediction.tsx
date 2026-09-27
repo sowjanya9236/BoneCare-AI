@@ -108,8 +108,8 @@ function Prediction() {
     sex: "Female",
     grade: "High",
     size: "4.7",
-    histology: HISTOLOGY[0],
-    site: SITES[0],
+    histology: HISTOLOGY[0]!,
+    site: SITES[0]!,
   });
   const [loading, setLoading] = useState(false);
   const [result, setResult] = useState<Result | null>(null);
