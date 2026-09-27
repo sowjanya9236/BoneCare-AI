@@ -4,8 +4,9 @@ import meta from "./model/meta.json";
 import treatmentModel from "./model/Treatment.json";
 import stageModel from "./model/Predicted_Stage.json";
 import durationModel from "./model/Surgical_Duration.json";
-import complexityAsset from "./model/Surgical_Complexity.json.asset.json";
-import careAsset from "./model/Post_Treatment_Care_Instructions.json.asset.json";
+import { gunzipSync } from "zlib";
+import complexityGz from "./model/Surgical_Complexity.json.gz?inline";
+import careGz from "./model/Post_Treatment_Care_Instructions.json.gz?inline";
 
 type TreeNode = {
   nodeid: number;
