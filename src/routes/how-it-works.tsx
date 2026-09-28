@@ -1,7 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import howInput from "@/assets/how-input.jpg";
 import predictionReview from "@/assets/prediction-review.jpg";
-import aboutTheater from "@/assets/about-theater.jpg";
+import planXray from "@/assets/plan-xray.png.asset.json";
 
 export const Route = createFileRoute("/how-it-works")({
   head: () => ({
@@ -44,8 +44,8 @@ const steps = [
     n: "03",
     title: "Review the plan",
     text: "Treatment, stage, complexity, duration and post-treatment care.",
-    image: aboutTheater,
-    alt: "Surgical team reviewing a bone X-ray in an operating theater",
+    image: planXray.url,
+    alt: "Two X-ray views of a femur and knee on a radiology lightbox",
   },
 ];
 

@@ -6,8 +6,8 @@ import { predictPatient } from "@/lib/predict.functions";
 import { Button } from "@/components/ui/button";
 import doctor from "@/assets/doctor.png";
 import predictionBedside from "@/assets/prediction-bedside.jpg";
-import predictionReview from "@/assets/prediction-review.jpg";
 import aboutXray from "@/assets/about-xray.jpg";
+import predictionTheater from "@/assets/prediction-theater.png.asset.json";
 
 export const Route = createFileRoute("/prediction")({
   head: () => ({
@@ -122,7 +122,8 @@ function Prediction() {
   return (
     <div className="bg-hero">
       <div className="mx-auto max-w-[1440px] px-5 py-12">
-        <div className="grid items-start gap-6 lg:grid-cols-2 xl:grid-cols-[minmax(0,1.2fr)_minmax(0,1fr)_260px]">
+        <div className="grid items-start gap-6 md:grid-cols-[minmax(0,1fr)_220px] xl:grid-cols-[minmax(0,1fr)_300px]">
+          <div className="min-w-0">
           <form onSubmit={analyze} className="card-surface min-w-0 p-6 md:p-8">
           <h1 className="flex items-center gap-2 text-2xl font-bold">
             <Stethoscope className="size-6 text-primary" /> Patient Information
@@ -250,15 +251,15 @@ function Prediction() {
               <TriangleAlert className="size-4 shrink-0" /> {error}
             </p>
           )}
-        </form>
-
+          </form>
           <div className="min-w-0" aria-live="polite">
             {result && <Results result={result} />}
           </div>
-          <aside className="grid gap-4 sm:grid-cols-2 lg:col-span-2 xl:col-span-1 xl:grid-cols-1" aria-label="Clinical imagery">
+          </div>
+          <aside className="grid gap-4" aria-label="Clinical imagery">
             {[
               { src: predictionBedside, alt: "Doctor speaking with a patient resting in a hospital bed" },
-              { src: predictionReview, alt: "Doctors studying a bone X-ray on a monitor" },
+              { src: predictionTheater.url, alt: "Surgical team reviewing a bone X-ray in an operating theater" },
               { src: doctor, alt: "Oncologist reviewing patient results on a tablet" },
               { src: aboutXray, alt: "Femur and knee X-rays on a radiology lightbox" },
             ].map((image) => (
@@ -280,7 +281,7 @@ function Results({ result }: { result: Result }) {
   ];
 
   return (
-    <section className="animate-rise">
+    <section className="animate-rise mt-8">
       <h2 className="flex min-h-9 items-center gap-2 text-xl font-bold">
         <ScanLine className="size-6 text-primary" />
         AI Analysis Complete
