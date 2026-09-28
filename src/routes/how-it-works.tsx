@@ -1,7 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import howInput from "@/assets/how-input.jpg";
 import predictionReview from "@/assets/prediction-review.jpg";
-import aboutTheater from "@/assets/about-theater.jpg";
 import planXray from "@/assets/plan-xray.png.asset.json";
 
 export const Route = createFileRoute("/how-it-works")({

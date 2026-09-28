@@ -7,7 +7,6 @@ import { Button } from "@/components/ui/button";
 import doctor from "@/assets/doctor.png";
 import predictionBedside from "@/assets/prediction-bedside.jpg";
 import predictionReview from "@/assets/prediction-review.jpg";
-import aboutXray from "@/assets/about-xray.jpg";
 import predictionTheater from "@/assets/prediction-theater.png.asset.json";
 
 export const Route = createFileRoute("/prediction")({

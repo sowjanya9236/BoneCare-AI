@@ -1,6 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
 import aboutXray from "@/assets/about-xray.jpg";
-import aboutTheater from "@/assets/about-theater.jpg";
 import aboutPathology from "@/assets/about-pathology.jpg";
 import orthopedicCare from "@/assets/about-orthopedic-care.png.asset.json";
 

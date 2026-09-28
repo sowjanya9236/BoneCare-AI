@@ -2,7 +2,6 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import heroBone from "@/assets/hero-bone.png";
 import scanKnee from "@/assets/scan-knee.png";
 import scanSpine from "@/assets/scan-spine.png";
-import scanTumor from "@/assets/scan-tumor.png";
 import homeBonePain from "@/assets/home-bone-pain.png.asset.json";
 import { Zap, Brain, HeartPulse, Stethoscope, Pill, ScanLine } from "lucide-react";
 
