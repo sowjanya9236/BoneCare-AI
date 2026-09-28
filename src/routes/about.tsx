@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
-import scanTumor from "@/assets/scan-tumor.png";
-import scanKnee from "@/assets/scan-knee.png";
-import scanSpine from "@/assets/scan-spine.png";
+import aboutXray from "@/assets/about-xray.jpg";
+import aboutTheater from "@/assets/about-theater.jpg";
+import aboutPathology from "@/assets/about-pathology.jpg";
 
 export const Route = createFileRoute("/about")({
   head: () => ({
@@ -18,6 +18,8 @@ export const Route = createFileRoute("/about")({
         content:
           "Why BoneCare AI exists, what it does, and the limits of its predictions.",
       },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
   component: About,
@@ -45,45 +47,45 @@ function About() {
           </p>
         </div>
 
-        <h2 className="mt-12 text-2xl font-bold">Bone cancer in imaging</h2>
+        <h2 className="mt-12 text-2xl font-bold">From diagnosis to care</h2>
         <div className="mt-6 grid gap-5 sm:grid-cols-3">
           <figure className="card-surface overflow-hidden">
             <img
-              src={scanTumor}
-              alt="Radiograph of a femur showing an osteosarcoma near the knee"
+              src={aboutXray}
+              alt="Femur and knee X-rays displayed on a radiology lightbox"
               width={1024}
               height={1024}
               loading="lazy"
               className="aspect-square w-full object-cover"
             />
             <figcaption className="p-4 text-xs text-muted-foreground">
-              Osteosarcoma visible on a femur radiograph
+              Bone X-rays in the diagnostic process
             </figcaption>
           </figure>
           <figure className="card-surface overflow-hidden">
             <img
-              src={scanKnee}
-              alt="X-ray style scan of a knee joint with a tumour highlighted in red"
+              src={aboutPathology}
+              alt="Pathologist examining a slide beside a bone X-ray"
               width={1024}
               height={1024}
               loading="lazy"
               className="aspect-square w-full object-cover"
             />
             <figcaption className="p-4 text-xs text-muted-foreground">
-              Lesion highlighted at the knee joint
+              Pathology review alongside imaging
             </figcaption>
           </figure>
           <figure className="card-surface overflow-hidden">
             <img
-              src={scanSpine}
-              alt="X-ray style scan of the spine and pelvis with a vertebra highlighted"
+              src={aboutTheater}
+              alt="Surgical team in an operating theater reviewing a bone X-ray"
               width={1024}
               height={1024}
               loading="lazy"
               className="aspect-square w-full object-cover"
             />
             <figcaption className="p-4 text-xs text-muted-foreground">
-              Affected vertebra in the lower spine
+              Orthopedic care in the operating theater
             </figcaption>
           </figure>
         </div>

@@ -3,8 +3,11 @@ import { useState } from "react";
 import { useServerFn } from "@tanstack/react-start";
 import { Stethoscope, Pill, Hospital, Timer, HeartPulse, Sparkles, Check, TriangleAlert, ScanLine } from "lucide-react";
 import { predictPatient } from "@/lib/predict.functions";
+import { Button } from "@/components/ui/button";
 import doctor from "@/assets/doctor.png";
-import scanKnee from "@/assets/scan-knee.png";
+import predictionBedside from "@/assets/prediction-bedside.jpg";
+import predictionReview from "@/assets/prediction-review.jpg";
+import aboutXray from "@/assets/about-xray.jpg";
 
 export const Route = createFileRoute("/prediction")({
   head: () => ({
@@ -21,6 +24,8 @@ export const Route = createFileRoute("/prediction")({
         content:
           "AI-assisted treatment, stage, complexity and recovery insights from six clinical inputs.",
       },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
   component: Prediction,
@@ -67,12 +72,12 @@ const labelClass = "mb-2 block text-sm font-semibold text-foreground";
 function Prediction() {
   const runPrediction = useServerFn(predictPatient);
   const [form, setForm] = useState({
-    age: "31",
-    sex: "Female",
-    grade: "High",
-    size: "4.7",
-    histology: HISTOLOGY[0]!,
-    site: SITES[0]!,
+    age: "",
+    sex: "",
+    grade: "",
+    size: "",
+    histology: "",
+    site: "",
   });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -85,6 +90,7 @@ function Prediction() {
     e.preventDefault();
     setLoading(true);
     setError(null);
+    setResult(null);
     try {
       const data = await runPrediction({
         data: {
@@ -115,9 +121,9 @@ function Prediction() {
 
   return (
     <div className="bg-hero">
-      <div className="mx-auto max-w-5xl px-5 py-16">
-        <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_300px] lg:items-start">
-          <form onSubmit={analyze} className="card-surface p-8 md:p-10">
+      <div className="mx-auto max-w-[1440px] px-5 py-12">
+        <div className="grid items-start gap-6 lg:grid-cols-2 xl:grid-cols-[minmax(0,1.2fr)_minmax(0,1fr)_260px]">
+          <form onSubmit={analyze} className="card-surface min-w-0 p-6 md:p-8">
           <h1 className="flex items-center gap-2 text-2xl font-bold">
             <Stethoscope className="size-6 text-primary" /> Patient Information
           </h1>
@@ -136,6 +142,7 @@ function Prediction() {
                 min={0}
                 max={120}
                 required
+                placeholder="Enter age"
                 className={inputClass}
                 value={form.age}
                 onChange={(e) => set("age")(e.target.value)}
@@ -147,10 +154,12 @@ function Prediction() {
               </label>
               <select
                 id="sex"
+                required
                 className={inputClass}
                 value={form.sex}
                 onChange={(e) => set("sex")(e.target.value)}
               >
+                <option value="" disabled>Select sex</option>
                 <option>Female</option>
                 <option>Male</option>
               </select>
@@ -161,10 +170,12 @@ function Prediction() {
               </label>
               <select
                 id="grade"
+                required
                 className={inputClass}
                 value={form.grade}
                 onChange={(e) => set("grade")(e.target.value)}
               >
+                <option value="" disabled>Select grade</option>
                 <option>High</option>
                 <option>Intermediate</option>
                 <option>Low</option>
@@ -181,6 +192,7 @@ function Prediction() {
                 min={0}
                 max={60}
                 required
+                placeholder="Enter size"
                 className={inputClass}
                 value={form.size}
                 onChange={(e) => set("size")(e.target.value)}
@@ -192,10 +204,12 @@ function Prediction() {
               </label>
               <select
                 id="histology"
+                required
                 className={inputClass}
                 value={form.histology}
                 onChange={(e) => set("histology")(e.target.value)}
               >
+                <option value="" disabled>Select histological type</option>
                 {HISTOLOGY.map((h) => (
                   <option key={h}>{h}</option>
                 ))}
@@ -207,10 +221,12 @@ function Prediction() {
               </label>
               <select
                 id="site"
+                required
                 className={inputClass}
                 value={form.site}
                 onChange={(e) => set("site")(e.target.value)}
               >
+                <option value="" disabled>Select primary site</option>
                 {SITES.map((s) => (
                   <option key={s}>{s}</option>
                 ))}
@@ -218,16 +234,16 @@ function Prediction() {
             </div>
           </div>
 
-          <button
+          <Button
             type="submit"
             disabled={loading}
-            className="mt-8 w-full rounded-full bg-gradient-primary py-4 font-semibold text-primary-foreground shadow-elevated transition-transform hover:-translate-y-0.5 disabled:opacity-60"
+            className="mt-8 h-14 w-full rounded-full bg-gradient-primary font-semibold text-primary-foreground shadow-elevated transition-transform hover:-translate-y-0.5"
           >
             <span className="inline-flex items-center justify-center gap-2">
               <Sparkles className="size-5" />
               {loading ? "Analyzing…" : "Analyze Patient"}
             </span>
-          </button>
+          </Button>
 
           {error && (
             <p className="mt-4 flex items-center gap-2 rounded-xl border border-destructive/30 bg-destructive/10 px-4 py-3 text-sm text-destructive">
@@ -236,48 +252,20 @@ function Prediction() {
           )}
         </form>
 
-        <aside className="space-y-5 lg:sticky lg:top-24">
-          <div className="card-surface overflow-hidden">
-            <img
-              src={doctor}
-              alt="Oncologist reviewing patient results on a tablet"
-              width={1024}
-              height={1024}
-              loading="lazy"
-              className="aspect-[4/5] w-full object-cover"
-            />
-            <div className="p-5">
-              <h2 className="flex items-center gap-2 text-sm font-semibold">
-                <Stethoscope className="size-4 text-primary" /> Built with
-                clinicians
-              </h2>
-              <p className="mt-1 text-xs text-muted-foreground">
-                Results structured the way an oncologist reviews a case.
-              </p>
-            </div>
+          <div className="min-w-0" aria-live="polite">
+            {result && <Results result={result} />}
           </div>
-          <div className="card-surface overflow-hidden">
-            <img
-              src={scanKnee}
-              alt="Bone scan with a tumour highlighted near the knee"
-              width={1024}
-              height={1024}
-              loading="lazy"
-              className="aspect-square w-full object-cover"
-            />
-            <div className="p-5">
-              <h2 className="flex items-center gap-2 text-sm font-semibold">
-                <ScanLine className="size-4 text-primary" /> Scan-aware outputs
-              </h2>
-              <p className="mt-1 text-xs text-muted-foreground">
-                Predictions weigh site, size and grade together.
-              </p>
-            </div>
-          </div>
-        </aside>
+          <aside className="grid gap-4 sm:grid-cols-2 lg:col-span-2 xl:col-span-1 xl:grid-cols-1" aria-label="Clinical imagery">
+            {[
+              { src: predictionBedside, alt: "Doctor speaking with a patient resting in a hospital bed" },
+              { src: predictionReview, alt: "Doctors studying a bone X-ray on a monitor" },
+              { src: doctor, alt: "Oncologist reviewing patient results on a tablet" },
+              { src: aboutXray, alt: "Femur and knee X-rays on a radiology lightbox" },
+            ].map((image) => (
+              <img key={image.alt} src={image.src} alt={image.alt} width={1024} height={1024} loading="lazy" className="aspect-[4/3] w-full rounded-lg object-cover" />
+            ))}
+          </aside>
         </div>
-
-        {result && <Results result={result} />}
       </div>
     </div>
   );
@@ -292,26 +280,27 @@ function Results({ result }: { result: Result }) {
   ];
 
   return (
-    <section className="animate-rise mt-12">
-      <p className="text-center text-xs font-bold tracking-[0.25em] text-muted-foreground uppercase">
+    <section className="animate-rise">
+      <h2 className="flex min-h-9 items-center gap-2 text-xl font-bold">
+        <ScanLine className="size-6 text-primary" />
         AI Analysis Complete
-      </p>
+      </h2>
 
-      <div className="mt-6 grid gap-5 sm:grid-cols-2">
+      <div className="mt-5 grid grid-cols-2 gap-3">
         {cards.map((c) => (
-          <div key={c.label} className="card-surface p-7 text-center">
-            <c.Icon className="mx-auto size-7 text-primary" />
-            <p className="mt-3 text-xs font-semibold tracking-widest text-muted-foreground uppercase">
+          <div key={c.label} className="card-surface min-w-0 p-4 text-center">
+            <c.Icon className="mx-auto size-6 text-primary" />
+            <p className="mt-3 text-xs font-semibold text-muted-foreground uppercase">
               {c.label}
             </p>
-            <p className="text-gradient mt-2 font-display text-2xl font-bold">
+            <p className="mt-2 break-words font-display text-base font-bold text-primary md:text-lg">
               {c.value}
             </p>
           </div>
         ))}
       </div>
 
-      <div className="card-surface mt-5 p-7">
+      <div className="card-surface mt-3 p-5">
         <h2 className="flex items-center gap-2 text-lg font-semibold">
           <HeartPulse className="size-5 text-primary" /> Post-Treatment Care
         </h2>
