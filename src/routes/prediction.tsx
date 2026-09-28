@@ -6,7 +6,6 @@ import { predictPatient } from "@/lib/predict.functions";
 import { Button } from "@/components/ui/button";
 import doctor from "@/assets/doctor.png";
 import predictionBedside from "@/assets/prediction-bedside.jpg";
-import predictionReview from "@/assets/prediction-review.jpg";
 import aboutXray from "@/assets/about-xray.jpg";
 import predictionTheater from "@/assets/prediction-theater.png.asset.json";
 
