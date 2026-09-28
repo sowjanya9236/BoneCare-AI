@@ -20,6 +20,8 @@ export const Route = createFileRoute("/")({
         content:
           "Early insights. Smarter treatment decisions. AI-assisted bone cancer analysis for clinicians.",
       },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
   component: Index,
