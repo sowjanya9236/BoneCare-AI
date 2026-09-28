@@ -3,6 +3,7 @@ import heroBone from "@/assets/hero-bone.png";
 import scanKnee from "@/assets/scan-knee.png";
 import scanSpine from "@/assets/scan-spine.png";
 import scanTumor from "@/assets/scan-tumor.png";
+import homeBonePain from "@/assets/home-bone-pain.png.asset.json";
 import { Zap, Brain, HeartPulse, Stethoscope, Pill, ScanLine } from "lucide-react";
 
 export const Route = createFileRoute("/")({
@@ -152,8 +153,8 @@ const scans = [
     text: "Spread across vertebrae and pelvis weighed together.",
   },
   {
-    src: scanTumor,
-    alt: "Radiograph of a femur showing an osteosarcoma near the knee",
+    src: homeBonePain.url,
+    alt: "Patient holding her painful lower leg beside an illustration of bone anatomy",
     title: "Histology patterns",
     text: "Radiograph textures matched to tumour type.",
   },
