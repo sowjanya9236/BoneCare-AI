@@ -154,7 +154,7 @@ const scans = [
   {
     src: homeBonePain.url,
     alt: "Patient holding her painful lower leg beside an illustration of bone anatomy",
-    title: "Histology patterns",
-    text: "Radiograph textures matched to tumour type.",
+    title: "Bone symptoms",
+    text: "Clinical context alongside tumour characteristics.",
   },
 ];

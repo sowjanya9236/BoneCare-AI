@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import doctor from "@/assets/doctor.png";
 import predictionBedside from "@/assets/prediction-bedside.jpg";
 import predictionReview from "@/assets/prediction-review.jpg";
+import aboutXray from "@/assets/about-xray.jpg";
 import predictionTheater from "@/assets/prediction-theater.png.asset.json";
 
 export const Route = createFileRoute("/prediction")({
@@ -259,9 +260,9 @@ function Prediction() {
           <aside className="grid gap-4" aria-label="Clinical imagery">
             {[
               { src: predictionBedside, alt: "Doctor speaking with a patient resting in a hospital bed" },
-              { src: predictionReview, alt: "Doctors studying a bone X-ray on a monitor" },
-              { src: doctor, alt: "Oncologist reviewing patient results on a tablet" },
               { src: predictionTheater.url, alt: "Surgical team reviewing a bone X-ray in an operating theater" },
+              { src: doctor, alt: "Oncologist reviewing patient results on a tablet" },
+              { src: aboutXray, alt: "Femur and knee X-rays on a radiology lightbox" },
             ].map((image) => (
               <img key={image.alt} src={image.src} alt={image.alt} width={1024} height={1024} loading="lazy" className="aspect-[4/3] w-full rounded-lg object-cover" />
             ))}
