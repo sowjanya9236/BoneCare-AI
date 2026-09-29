@@ -9,4 +9,4 @@
 > the editor, so keep the branch in a working state.
 <!-- LOVABLE:END -->
 
-- Keep prediction analysis directly below the patient form, with four clinical images stacked in a separate right column on larger screens; this follows the requested reading order.
+- Keep prediction analysis directly below the patient form, with five large clinical images stacked in a separate right column extending alongside the results on larger screens; this follows the requested reading order.

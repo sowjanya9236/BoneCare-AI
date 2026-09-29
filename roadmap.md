@@ -1,0 +1,2 @@
+- [x] Display the clearer patient-and-bone image on Home without cropping its medical context.
+- [x] Show five larger clinical images in the Prediction right column, extending beside the analysis after submission.
