@@ -260,11 +260,11 @@ function Prediction() {
           </div>
           <aside className="grid gap-4" aria-label="Clinical imagery">
             {[
-              { src: predictionArmPain.url, alt: "X-ray style view of an arm skeleton with painful joints highlighted in red" },
+              { src: predictionBedside, alt: "Doctor speaking with a patient resting in a hospital bed" },
               { src: predictionTheater.url, alt: "Surgical team reviewing a bone X-ray in an operating theater" },
               { src: doctor, alt: "Oncologist reviewing patient results on a tablet" },
               { src: aboutXray, alt: "Femur and knee X-rays on a radiology lightbox" },
-              { src: scanTumor, alt: "Bone tumour visible in a knee and femur X-ray" },
+              { src: predictionArmPain.url, alt: "X-ray style view of an arm skeleton with painful joints highlighted in red" },
             ].map((image) => (
               <img key={image.alt} src={image.src} alt={image.alt} width={1024} height={1024} loading="lazy" className="aspect-[4/3] w-full rounded-lg object-cover" />
             ))}
