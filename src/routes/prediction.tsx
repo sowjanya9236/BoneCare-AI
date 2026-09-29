@@ -8,7 +8,6 @@ import doctor from "@/assets/doctor.png";
 import predictionBedside from "@/assets/prediction-bedside.jpg";
 import predictionArmPain from "@/assets/prediction-arm-pain.png.asset.json";
 import aboutXray from "@/assets/about-xray.jpg";
-import scanTumor from "@/assets/scan-tumor.png";
 import predictionTheater from "@/assets/prediction-theater.png.asset.json";
 
 export const Route = createFileRoute("/prediction")({
