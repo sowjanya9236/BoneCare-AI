@@ -259,7 +259,7 @@ function Prediction() {
           </div>
           <aside className="grid gap-4" aria-label="Clinical imagery">
             {[
-              { src: predictionBedside, alt: "Doctor speaking with a patient resting in a hospital bed" },
+              { src: predictionArmPain.url, alt: "X-ray style view of an arm skeleton with painful joints highlighted in red" },
               { src: predictionTheater.url, alt: "Surgical team reviewing a bone X-ray in an operating theater" },
               { src: doctor, alt: "Oncologist reviewing patient results on a tablet" },
               { src: aboutXray, alt: "Femur and knee X-rays on a radiology lightbox" },
