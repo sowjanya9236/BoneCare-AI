@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import doctor from "@/assets/doctor.png";
 import predictionBedside from "@/assets/prediction-bedside.jpg";
 import aboutXray from "@/assets/about-xray.jpg";
+import scanTumor from "@/assets/scan-tumor.png";
 import predictionTheater from "@/assets/prediction-theater.png.asset.json";
 
 export const Route = createFileRoute("/prediction")({
@@ -122,7 +123,7 @@ function Prediction() {
   return (
     <div className="bg-hero">
       <div className="mx-auto max-w-[1440px] px-5 py-12">
-        <div className="grid items-start gap-6 md:grid-cols-[minmax(0,1fr)_220px] xl:grid-cols-[minmax(0,1fr)_300px]">
+        <div className="grid items-start gap-6 md:grid-cols-[minmax(0,1fr)_280px] xl:grid-cols-[minmax(0,1fr)_360px]">
           <div className="min-w-0">
           <form onSubmit={analyze} className="card-surface min-w-0 p-6 md:p-8">
           <h1 className="flex items-center gap-2 text-2xl font-bold">
@@ -262,6 +263,7 @@ function Prediction() {
               { src: predictionTheater.url, alt: "Surgical team reviewing a bone X-ray in an operating theater" },
               { src: doctor, alt: "Oncologist reviewing patient results on a tablet" },
               { src: aboutXray, alt: "Femur and knee X-rays on a radiology lightbox" },
+              { src: scanTumor, alt: "Bone tumour visible in a knee and femur X-ray" },
             ].map((image) => (
               <img key={image.alt} src={image.src} alt={image.alt} width={1024} height={1024} loading="lazy" className="aspect-[4/3] w-full rounded-lg object-cover" />
             ))}
