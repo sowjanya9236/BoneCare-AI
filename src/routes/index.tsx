@@ -124,7 +124,7 @@ function Index() {
                 width={1024}
                 height={1024}
                 loading="lazy"
-                className={s.title === "Bone symptoms" ? "aspect-square w-full bg-foreground object-contain" : "aspect-square w-full object-cover"}
+                className="aspect-square w-full object-cover"
               />
               <figcaption className="p-5">
                 <h3 className="font-semibold">{s.title}</h3>
