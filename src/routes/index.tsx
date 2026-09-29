@@ -146,15 +146,15 @@ const scans = [
     text: "Lesions flagged directly on the affected bone.",
   },
   {
-    src: scanSpine,
-    alt: "X-ray style scan of the spine and pelvis with a vertebra highlighted",
-    title: "Stage mapping",
-    text: "Spread across vertebrae and pelvis weighed together.",
-  },
-  {
     src: homeBonePain,
     alt: "Patient holding her painful lower leg beside an illustration of bone anatomy",
     title: "Bone symptoms",
     text: "Clinical context alongside tumour characteristics.",
+  },
+  {
+    src: scanSpine,
+    alt: "X-ray style scan of the spine and pelvis with a vertebra highlighted",
+    title: "Stage mapping",
+    text: "Spread across vertebrae and pelvis weighed together.",
   },
 ];
