@@ -5,6 +5,7 @@ import { Stethoscope, Pill, Hospital, Timer, HeartPulse, Sparkles, Check, Triang
 import { predictPatient } from "@/lib/predict.functions";
 import { Button } from "@/components/ui/button";
 import doctor from "@/assets/doctor.png";
+import predictionBedside from "@/assets/prediction-bedside.jpg";
 import predictionArmPain from "@/assets/prediction-arm-pain.png.asset.json";
 import aboutXray from "@/assets/about-xray.jpg";
 import scanTumor from "@/assets/scan-tumor.png";
