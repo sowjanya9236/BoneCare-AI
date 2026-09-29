@@ -8,13 +8,13 @@ import { Zap, Brain, HeartPulse, Stethoscope, Pill, ScanLine } from "lucide-reac
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "BoneCare AI — AI-Powered Bone Cancer Prediction" },
+      { title: "BoneCare - AI" },
       {
         name: "description",
         content:
           "Enter patient details and get AI-assisted treatment, stage, complexity and recovery insights in seconds.",
       },
-      { property: "og:title", content: "BoneCare AI — AI-Powered Bone Cancer Prediction" },
+      { property: "og:title", content: "BoneCare - AI" },
       {
         property: "og:description",
         content:

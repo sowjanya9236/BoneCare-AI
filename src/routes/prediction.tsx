@@ -13,7 +13,7 @@ import predictionTheater from "@/assets/prediction-theater.png";
 export const Route = createFileRoute("/prediction")({
   head: () => ({
     meta: [
-      { title: "Prediction — BoneCare AI" },
+      { title: "BoneCare AI" },
       {
         name: "description",
         content:
