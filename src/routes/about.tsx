@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import aboutXray from "@/assets/about-xray.jpg";
 import aboutPathology from "@/assets/about-pathology.jpg";
-import orthopedicCare from "@/assets/about-orthopedic-care.png.asset.json";
+import orthopedicCare from "@/assets/about-orthopedic-care.png";
 
 export const Route = createFileRoute("/about")({
   head: () => ({
@@ -77,7 +77,7 @@ function About() {
           </figure>
           <figure className="card-surface overflow-hidden">
             <img
-              src={orthopedicCare.url}
+              src={orthopedicCare}
               alt="Clinician caring for a patient's lower leg in an examination room"
               width={1024}
               height={1024}
